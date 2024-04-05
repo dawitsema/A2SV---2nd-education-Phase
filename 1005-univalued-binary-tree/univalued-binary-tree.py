@@ -6,9 +6,8 @@
 #         self.right = right
 class Solution:
     def isUnivalTree(self, root: Optional[TreeNode]) -> bool:
-        queue = deque()
+        queue = deque([root])
         comp = root.val
-        queue.append(root)
         while queue:
             node = queue.pop()   
             if node.val != comp:
