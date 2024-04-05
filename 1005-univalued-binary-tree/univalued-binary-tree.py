@@ -11,7 +11,7 @@ class Solution:
         queue.append(root)
         while queue:
             node = queue.pop()   
-            if node and node.val != comp:
+            if node.val != comp:
                 return False
             if node.left:
                 queue.append(node.left)
