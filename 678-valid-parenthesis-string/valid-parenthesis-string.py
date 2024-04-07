@@ -8,7 +8,7 @@ class Solution:
                 stack.append(i)
             elif ch == '*':
                 asterisks.append(i)
-            else:  # ch is ')'
+            else:  
                 if stack:
                     stack.pop()
                 elif asterisks:
@@ -16,7 +16,6 @@ class Solution:
                 else:
                     return False
         
-        # Match remaining '(' and '*' with ')'
         while stack and asterisks:
             if stack[-1] < asterisks[-1]:
                 stack.pop()
