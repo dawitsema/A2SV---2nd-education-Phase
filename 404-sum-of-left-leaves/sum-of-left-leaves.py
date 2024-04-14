@@ -6,6 +6,19 @@
 #         self.right = right
 class Solution:
     def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
+        stack = [(root, False)]
+        ans = 0
+        while stack:
+            node, isLeft = stack.pop()
+            if not node.left and not node.right and isLeft:
+                ans += node.val
+            
+            if node.left:
+                stack.append((node.left, True))
+            if node.right:
+                stack.append((node.right, False))
+
+        return ans
         # queue = deque([(root, False)])
         # ans = 0
         # while queue:
@@ -18,13 +31,13 @@ class Solution:
         #         queue.append((node.right, False))
 
         # return ans 
-        def dfs(node, isLeft):
-            if not node: return 0
-            if not node.left and not node.right and isLeft:
-                return node.val
-            return dfs(node.left, True) + dfs(node.right, False)
+        # def dfs(node, isLeft):
+        #     if not node: return 0
+        #     if not node.left and not node.right and isLeft:
+        #         return node.val
+        #     return dfs(node.left, True) + dfs(node.right, False)
         
-        return dfs(root, False)
+        # return dfs(root, False)
 
         
         
