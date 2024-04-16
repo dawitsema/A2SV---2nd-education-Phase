@@ -17,6 +17,7 @@ class Solution:
                 newNode2.right = temp2
                 node.left = newNode1
                 node.right = newNode2
+                return
             dfs(node.left, d+1)
             dfs(node.right, d+1)
             
