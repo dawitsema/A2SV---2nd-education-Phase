@@ -2,9 +2,9 @@ class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         graph = defaultdict(list)
         indegree = [0]*numCourses
-        for first, second in prerequisites:
-            graph[second].append(first)
-            indegree[first] += 1
+        for pr in prerequisites:
+            graph[pr[1]].append(pr[0])
+            indegree[pr[0]] += 1
         
         queue = deque([i for i, x in enumerate(indegree) if x == 0])
         ans = []
