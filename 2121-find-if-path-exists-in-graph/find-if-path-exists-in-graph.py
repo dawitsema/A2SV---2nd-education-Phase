@@ -6,17 +6,17 @@ class Solution:
             graph[node1].append(node2)
             graph[node2].append(node1)
 
-        stack = [source]
+        queue = deque([source])
         visited = set([source])
 
-        while stack:
-            node = stack.pop()
+        while queue:
+            node = queue.popleft()
             if node == destination:
                 return True
 
             for child in graph[node]:
                 if child not in visited:
-                    stack.append(child)
+                    queue.append(child)
                     visited.add(child)
         
         return False
