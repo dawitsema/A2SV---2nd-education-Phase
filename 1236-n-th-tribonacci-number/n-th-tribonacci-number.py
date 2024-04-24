@@ -1,7 +1,8 @@
 class Solution:
-    def tribonacci(self, n: int) -> int:
-        nums = [0, 1, 1]
+    def __init__(self):
+        self.nums = [0, 1, 1]
         for i in range(35):
-            nums.append(nums[-1] + nums[-2] + nums[-3])
+            self.nums.append(self.nums[-1] + self.nums[-2] + self.nums[-3])
 
-        return nums[n]
+    def tribonacci(self, n: int) -> int:
+        return self.nums[n]
