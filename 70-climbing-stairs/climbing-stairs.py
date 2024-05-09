@@ -4,13 +4,13 @@ class Solution:
 
         def jump(n):
             if n == 1 or n == 0:
-                return n
+                return 1
             if n not in memo:
                 memo[n] = jump(n-1) + jump(n-2)
     
             return memo[n]
 
-        return jump(1 + n)
+        return jump(n)
 
 
 
