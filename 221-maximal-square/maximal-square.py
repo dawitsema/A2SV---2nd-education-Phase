@@ -1,22 +1,15 @@
 class Solution:
     def maximalSquare(self, matrix: List[List[str]]) -> int:
+        if len(matrix) == 0:
+            return 0
         m, n = len(matrix), len(matrix[0])
-        memo = {}
-        def dp(r, c):
-            if r >= m or c >= n:
-                return 0
-            if (r, c) not in memo:
-                right = dp(r, c+1)
-                down = dp(r+1, c)
-                both = dp(r+1, c+1)
+        dp = [[0]*(n+1) for _ in range(m+1)]
 
-                if matrix[r][c] == "1":
-                    memo[(r, c)] = 1 + min(right, down, both)
-                else:
-                    memo[(r, c)] = 0
-            
-            return memo[(r, c)]
+        side = 0
+        for i in range(1, m+1):
+            for j in range(1, n+1):
+                if matrix[i-1][j-1] == "1":
+                    dp[i][j] = 1 + min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1])
+                    side = max(dp[i][j], side)
         
-        dp(0, 0)
-        side = max(memo.values())
         return side * side
