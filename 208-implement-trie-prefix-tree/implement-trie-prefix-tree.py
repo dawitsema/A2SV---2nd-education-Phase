@@ -28,7 +28,7 @@ class Trie:
                 return False
             current = current.children[ind]
         
-        return True if current.is_end else False
+        return current.is_end
         
 
     def startsWith(self, prefix: str) -> bool:
