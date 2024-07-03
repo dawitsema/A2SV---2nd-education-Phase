@@ -1,51 +1,36 @@
 class Robot:
 
     def __init__(self, width: int, height: int):
-        self.dir="East"
-        self.cor=[0,0]
-        self.arr=[width-1,height-1]
-        self.width=width
-        self.height=height
+        self.pos = 0
+        self.dir = 0
+        self.dirs = {0: "East", 1: "North", 2: "West", 3: "South"}
+        self.width = width - 1
+        self.height = height - 1
+        self.mid = height + width - 2
 
     def step(self, num: int) -> None:
-        total=((self.height+self.width-2)*2)
-        num=num%total
-        if num!=0:
-           i=0
-           while i<num:
-                if self.dir=="East":
-                    if self.cor[0]==self.width-1:
-                        num+=1
-                        self.dir="North"
-                    else:self.cor[0]+=1
+        self.pos += num
+        self.pos %= (self.mid * 2)
+        if self.pos > self.mid + self.width:
+            self.dir = 3
+        elif self.pos > self.mid:
+            self.dir = 2
+        elif self.pos > self.width:
+            self.dir = 1
+        elif not self.pos:
+            self.dir = 3
+        else:
+            self.dir = 0
 
-                elif self.dir=="West":
-                    if self.cor[0]==0:
-                        num+=1
-                        self.dir="South"
-                    else:self.cor[0]-=1
-                elif self.dir=="North":
-                    if self.cor[1]==self.height-1:
-                        num+=1
-                        self.dir="West"
-                    else:self.cor[1]+=1
-                elif self.dir=="South":
-                    if self.cor[1]==0:
-                        num+=1
-                        self.dir="East"
-                    else:self.cor[1]-=1
-                i+=1      
-        elif self.cor==[0,0]  and self.dir=="East":self.dir="South"
-      
     def getPos(self) -> List[int]:
-        return self.cor
+        if self.pos > self.mid + self.width:
+            return [0,self.height - (self.pos - self.mid - self.width)]
+        elif self.pos > self.mid:
+            return [self.width - (self.pos - self.mid) ,self.height]
+        elif self.pos > self.width:
+            return [self.width, self.pos - self.width ]
+        else:
+            return [self.pos,0]
 
     def getDir(self) -> str:
-        return self.dir
-
-
-# Your Robot object will be instantiated and called as such:
-# obj = Robot(width, height)
-# obj.step(num)
-# param_2 = obj.getPos()
-# param_3 = obj.getDir()
+        return self.dirs[self.dir]
