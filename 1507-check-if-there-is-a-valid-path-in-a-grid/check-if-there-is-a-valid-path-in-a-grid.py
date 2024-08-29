@@ -17,8 +17,11 @@ class Solution:
             return 0 <= row < len(grid) and 0 <= col < len(grid[0])
 
         visited = set([(0, 0)])
+        stack = [(0, 0)]
 
-        def dfs(row, col):
+        while stack:
+            row, col = stack.pop()
+
             if (row, col) == destination:
                 return True
 
@@ -27,9 +30,8 @@ class Solution:
                 nc = col + c
                 if inbound(nr, nc) and (nr, nc) not in visited and (-r, -c) in direction[grid[nr][nc]]:
                     visited.add((nr, nc))
-                    if dfs(nr, nc):
-                        return True
+                    stack.append((nr, nc))
 
-            return False
+            
 
-        return dfs(0, 0)
+        return False
