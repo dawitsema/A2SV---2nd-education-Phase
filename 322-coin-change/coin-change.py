@@ -1,10 +1,26 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        dp = [amount + 1] * (amount + 1)
-        dp[0] = 0  
+        memo = {}
+        def dp(rem):
+            if rem < 0:
+                return float("inf")
+            if rem == 0:
+                return 0
+            
+
+            if rem not in memo:
+                min_coin = float("inf")
+                for coin in coins:
+                    if rem - coin >= 0:
+                        min_coin = min(dp(rem - coin) + 1, min_coin)
+
+                memo[rem] = min_coin
+            
+            return memo[rem]
+
+        result = dp(amount)
+
+        return result if result != float("inf") else - 1
+
+
         
-        for coin in coins:
-            for x in range(coin, amount + 1):
-                dp[x] = min(dp[x], dp[x - coin] + 1)
-        
-        return dp[amount] if dp[amount] != amount + 1 else -1
