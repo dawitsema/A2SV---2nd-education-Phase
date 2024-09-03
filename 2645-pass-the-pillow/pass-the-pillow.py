@@ -7,9 +7,3 @@ class Solution:
             return 1 + effective_time
         else:
             return 2 * n - 1 - effective_time
-
-# Example usage:
-solution = Solution()
-n = 5
-time = 7
-print(solution.passThePillow(n, time))  # Output should be 3
