@@ -1,19 +1,19 @@
 class KthLargest:
 
     def __init__(self, k: int, nums: List[int]):
-        self.kth = sorted(nums, reverse = True)[:k]
-        self.c = k
-        heapify(self.kth)
+        self.heap = sorted(nums, reverse = True)[:k]
+        heapify(self.heap)
+        self.n = k
         
-    def add(self, val: int) -> int:
-        if len(self.kth) < self.c:
-            heappush(self.kth, val)
-        elif val > self.kth[0]:
-            heappop(self.kth)
-            heappush(self.kth, val)
-            
-        return self.kth[0]
 
+    def add(self, val: int) -> int:
+        if len(self.heap) < self.n:
+            heappush(self.heap, val)
+            
+        elif val > self.heap[0]:
+            heappop(self.heap)
+            heappush(self.heap, val)
+        return self.heap[0]
         
 
 
