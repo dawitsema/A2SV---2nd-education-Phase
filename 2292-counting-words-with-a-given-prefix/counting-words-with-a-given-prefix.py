@@ -1,14 +1,10 @@
 class Solution:
     def prefixCount(self, words: List[str], pref: str) -> int:
+        prefLen = len(pref)
         count = 0
+
         for i in range(len(words)):
-            p = True
-            for j in range(len(pref)):
-                if len(words[i]) < j + 1 or pref[j] != words[i][j]:
-                    p = False
-                    break
-            
-            if p:
+            if len(words[i]) >= prefLen and words[i][:prefLen] == pref:
                 count += 1
         
 
