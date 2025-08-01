@@ -1,22 +1,9 @@
 class Solution:
     def generate(self, numRows: int) -> List[List[int]]:
+        dp = [[1] * (i + 1) for i in range(numRows)]
 
-        ans = [[1]]
-
-        for i in range(2, numRows + 1):
-            temp = [1]
+        for i in range(2, numRows):
             for j in range(1, i):
-                if len(ans[-1]) == j:
-                    temp.append(1)
-                else:
-                    temp.append(ans[-1][j - 1] + ans[-1][j])
-            
-            ans.append(temp)
+                dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j]
 
-        
-        return ans
-
-
-
-        return ans
-        
+        return dp
