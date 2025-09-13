@@ -1,7 +1,7 @@
 class Solution:
     def maxFreqSum(self, s: str) -> int:
         def is_vowel(char):
-            return char.lower() in 'aeiou'
+            return char in {'a', 'e', 'i', 'o', 'u'}
 
         lettersFreq = Counter(s)
 
